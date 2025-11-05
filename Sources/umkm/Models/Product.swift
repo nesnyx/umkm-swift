@@ -1,17 +1,20 @@
 import Fluent
 import struct Foundation.UUID
 
-
-final class Todo: Model, @unchecked Sendable {
-    static let schema = "todos"
-    
+final class Product : Model. @unchecked Sendable {
+    static let schema = "products"
     @ID(key: .id)
     var id: UUID?
 
-    @Field(key: "title")
-    var title: String
+    @Field(key: "name")
+    var name: String
 
-    init() { }
+    @Field(key: "description")
+    var description: String
+
+    
+    @Field(key: "price")
+    var price: Int
 
     init(id: UUID? = nil, title: String) {
         self.id = id
