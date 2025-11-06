@@ -7,7 +7,6 @@ struct TodoDTO: Content {
     
     func toModel() -> Todo {
         let model = Todo()
-        
         model.id = self.id
         if let title = self.title {
             model.title = title

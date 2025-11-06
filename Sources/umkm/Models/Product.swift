@@ -1,8 +1,10 @@
 import Fluent
+
 import struct Foundation.UUID
 
-final class Product : Model. @unchecked Sendable {
-    static let schema = "products"
+final class Product: Model, @unchecked Sendable {
+    static let schema: String = "products"
+
     @ID(key: .id)
     var id: UUID?
 
@@ -12,19 +14,22 @@ final class Product : Model. @unchecked Sendable {
     @Field(key: "description")
     var description: String
 
-    
     @Field(key: "price")
     var price: Int
-
-    init(id: UUID? = nil, title: String) {
+    init() {}
+    init(id: UUID? = nil, name: String, description: String, price: Int) {
         self.id = id
-        self.title = title
+        self.name = name
+        self.description = description
+        self.price = price
     }
-    
-    func toDTO() -> TodoDTO {
+
+    func toDTO() -> ProductDTO {
         .init(
             id: self.id,
-            title: self.$title.value
+            name: self.name,
+            price: self.price,
+            description: self.description,
         )
     }
 }

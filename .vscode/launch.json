@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:umkm}",
+            "name": "Debug umkm",
+            "target": "umkm",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug umkm"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:umkm}",
+            "name": "Release umkm",
+            "target": "umkm",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release umkm"
+        }
+    ]
+}

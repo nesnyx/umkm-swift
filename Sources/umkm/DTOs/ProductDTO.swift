@@ -4,12 +4,12 @@ import Vapor
 
 struct ProductDTO : Content {
     var id : UUID?
-    var name : String?
-    var price : Int?
-    var description : String?
+    var name : String
+    var price : Int
+    var description : String
     
     func toModel() -> Product {
-        let model = Product()
+        let model : Product = Product()
         model.id = self.id
         model.name = self.name
         model.price = self.price
