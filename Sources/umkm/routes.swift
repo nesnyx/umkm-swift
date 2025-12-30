@@ -16,5 +16,9 @@ func routes(_ app: Application) throws {
         let name = req.parameters.get("name")!
         return "Hello, \(name)!"
     }
+
+    
     try api.register(collection: ProductController())
+    try api.register(collection: MerchantController())
+    try api.register(collection: TransactionController())
 }
