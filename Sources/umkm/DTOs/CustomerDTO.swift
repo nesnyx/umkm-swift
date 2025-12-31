@@ -5,7 +5,7 @@ struct CustomerDTO: Content {
     var id: UUID?
     var name: String
     var email: String?
-    var phone: String
+    var phone: String?
 
     func toModel() -> Customer {
         let model: Customer = Customer()

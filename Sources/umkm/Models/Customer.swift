@@ -12,10 +12,10 @@ final class Customer: Model, @unchecked Sendable {
 
     @OptionalField(key: "email")
     var email: String?
-    @Field(key: "phone")
-    var phone: String
+    @OptionalField(key: "phone")
+    var phone: String?
     
-    init(id : UUID? = nil , name : String, email : String?, phone : String){
+    init(id : UUID? = nil , name : String, email : String?, phone : String?){
         self.id = id 
         self.name = name
         self.email = email
