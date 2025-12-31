@@ -7,6 +7,7 @@ struct ProductController: RouteCollection {
         products.get(use: self.index)
         products.post(use: self.create)
         products.delete(use: self.delete) 
+        products.put(use: self.update)
     }
 
     @Sendable
@@ -31,5 +32,21 @@ struct ProductController: RouteCollection {
         }
         try await product.delete(on: req.db)
         return .noContent
+    }
+
+    @Sendable
+    func update(req: Request) async throws -> ProductDTO {
+        guard
+            let product: Product = try await Product.find(
+                req.parameters.get("productID"), on: req.db)
+        else {
+            throw Abort(.notFound)
+        }
+        let updatedProduct: ProductDTO = try req.content.decode(ProductDTO.self)
+        product.name = updatedProduct.name
+        product.description = updatedProduct.description
+        product.price = updatedProduct.price
+        try await product.save(on: req.db)
+        return product.toDTO()
     }
 }

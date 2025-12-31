@@ -7,6 +7,7 @@ struct MerchantController: RouteCollection {
         merchants.get(use: self.index)
         merchants.post(use: self.create)
         merchants.delete(use: self.delete)
+        merchants.put(use: self.update)
     }
 
     @Sendable
@@ -32,6 +33,18 @@ struct MerchantController: RouteCollection {
         return .noContent
     }
 
+    @Sendable
+    func update(req : Request) async throws -> MerchantDTO{
+        guard
+        let merchant = try await Merchant.find(req.parameters.get("merchantID"), on: req.db)
+        else {
+            throw Abort(.notFound)
+        }
+        let updatedMerchant : MerchantDTO = try req.content.decode(MerchantDTO.self)
+        merchant.name = updatedMerchant.name
+        try await merchant.save(on: req.db)
+        return merchant.toDTO()
+    }
     
 
 }
